@@ -1,6 +1,5 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import re
 
 # Note: this may change in the future as Culver's updates their web site.
 base_url = "https://www.culvers.com/restaurants/"
