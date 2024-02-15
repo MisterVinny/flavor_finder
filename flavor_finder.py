@@ -40,7 +40,7 @@ def flavor_finder() -> None:
     """ Gathers flavor data for each chosen location and then outputs that data.
     Update the location list with your favorite Culvers restaurant locations.
     Locations are typically all lower-case and the city names have hyphens, not spaces. This project assumes that users know
-    their locations and enter them correctly. It will simply skip over a returned 404.
+    their locations and enter them correctly. It will notify users of locations that are not valid.
     To know your location: go to the flavor of the day page for your restaurant and it should be at the end of the URL.
     """
     culvers_locations = ["verona", "west-allis", "appleton", "this is totally not a location", "arlington-heights"]
