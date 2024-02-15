@@ -1,4 +1,6 @@
-# Imports here
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import re
 
 # Note: this may change in the future as Culver's updates their web site.
 base_url = "https://www.culvers.com/restaurants/"
@@ -7,7 +9,17 @@ def fetch_flavors(location: str) -> dict:
     """ Given a single location string, this will get the flavors and dates for that location.
     Returns a dictionary of flavors for the five dates: { "date1": "flavor", "date2": "flavor", ... }
     """
-    print(location)
+    url = f"{base_url}{location}"
+    response_html = urlopen(url).read().decode("utf-8")
+    response_soup = BeautifulSoup(response_html, "html.parser")
+    # Soup selections are typically a list of matches, but class lookup here is specific enough that only the zero index is needed.
+    results = response_soup.select('div[class*="RestaurantCalendarPanel_containerCalendar"]')[0]
+    days = results.select('div[class*="_containerItem_"]')
+    for day in days:
+        date = day.select("h3")[0].contents[0]
+        flavor = day.select('a[class*="FlavorLink__Kvd0e"]')[0].contents[0]
+        print("Date : ", date)
+        print("Flavor : ", flavor)
 
 def output_flavor_data(collected_flavor_data: dict):
     """ Given the final collection of location and flavor data, as a dictionary, this will
