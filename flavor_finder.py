@@ -27,7 +27,7 @@ def output_flavor_data(collected_flavor_data: dict):
     """ Given the final collection of location and flavor data, as a dictionary, this will
     output the data to the command-line. This may be modified in the future to output to a CSV, email, front-end, etc.
     """
-    pass
+    pprint(collected_flavor_data)
 
 def flavor_finder() -> None:
     """ Gathers flavor data for each chosen location and then outputs that data.
@@ -36,10 +36,31 @@ def flavor_finder() -> None:
     their locations and enter them correctly. It will simply skip over a returned 404.
     To know your location: go to the flavor of the day page for your restaurant and it should be at the end of the URL.
     """
-    culvers_locations = ["verona", "west-allis", "appleton", "arlington-heights"]
-    collected_flavor_data = {}
-    for location in culvers_locations:
-        collected_flavor_data[location] = fetch_flavors(location)
-    pprint(collected_flavor_data, sort_dicts=False)
+    # culvers_locations = ["verona", "west-allis", "appleton", "arlington-heights"]
+    # collected_flavor_data = {}
+    # for location in culvers_locations:
+    #     collected_flavor_data[location] = fetch_flavors(location)
+    # pprint(collected_flavor_data, sort_dicts=False)
+    dummy_flavors = {'verona': {'Today - ': 'Dark Chocolate Decadence',
+                                'Tomorrow - ': 'Chocolate Heath Crunch',
+                                'Saturday, February 17': 'Lemon Berry Layer Cake',
+                                'Sunday, February 18': 'Turtle',
+                                'Monday, February 19': 'Mint Explosion'},
+                    'west-allis': {'Today - ': 'Blackberry Cobbler',
+                                    'Tomorrow - ': 'Turtle',
+                                    'Saturday, February 17': 'Raspberry Cheesecake',
+                                    'Sunday, February 18': 'Mint Cookie',
+                                    'Monday, February 19': 'Dark Chocolate Decadence'},
+                    'appleton': {'Today - ': 'Butter Pecan',
+                                'Tomorrow - ': 'Chocolate Covered Strawberry',
+                                'Saturday, February 17': 'Caramel Pecan',
+                                'Sunday, February 18': 'Red Raspberry',
+                                'Monday, February 19': 'Chocolate Volcano'},
+                    'arlington-heights': {'Today - ': 'Salted Caramel Pecan Pie',
+                                        'Tomorrow - ': 'Chocolate Caramel Twist',
+                                        'Saturday, February 17': 'Turtle Dove',
+                                        'Sunday, February 18': 'Lemon Berry Layer Cake',
+                                        'Monday, February 19': 'Dark Chocolate PB Crunch'}}
+    output_flavor_data(dummy_flavors)
 
 flavor_finder()
