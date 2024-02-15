@@ -26,7 +26,7 @@ def fetch_flavors(location: str) -> dict:
         return_flavors[date] = flavor
     return return_flavors
 
-def output_flavor_data(collected_flavor_data: dict, days):
+def output_flavor_data(collected_flavor_data: dict):
     """ Given the final collection of location and flavor data, as a dictionary, this will
     output the data to the command-line. This may be modified in the future to output to a CSV, email, front-end, etc.
     """
@@ -52,7 +52,6 @@ def flavor_finder() -> None:
             valid_locations.append(location)
             collected_flavor_data[location] = fetched_flavors
     # Creates a list of days - dynamic, but reliant on the date keys of the first location.
-    days = list(collected_flavor_data[valid_locations[0]].keys())
-    output_flavor_data(collected_flavor_data, days)
+    output_flavor_data(collected_flavor_data)
 
 flavor_finder()
