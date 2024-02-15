@@ -26,7 +26,7 @@ def fetch_flavors(location: str) -> dict:
         return_flavors[date] = flavor
     return return_flavors
 
-def output_flavor_data(collected_flavor_data: dict):
+def output_flavor_data(collected_flavor_data: dict) -> None:
     """ Given the final collection of location and flavor data, as a dictionary, this will
     output the data to the command-line. This may be modified in the future to output to a CSV, email, front-end, etc.
     """
