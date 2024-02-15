@@ -10,7 +10,11 @@ def fetch_flavors(location: str) -> dict:
     """
     return_flavors = {}
     url = f"{base_url}{location}"
-    response_html = urlopen(url).read().decode("utf-8")
+    try:
+        response_html = urlopen(url).read().decode("utf-8")
+    except:
+        print("Invalid location : ", location, "\n")
+        return None
     response_soup = BeautifulSoup(response_html, "html.parser")
 
     # Soup selections are typically a list of matches, but class lookup here is specific enough that only the zero index is needed.
@@ -39,12 +43,16 @@ def flavor_finder() -> None:
     their locations and enter them correctly. It will simply skip over a returned 404.
     To know your location: go to the flavor of the day page for your restaurant and it should be at the end of the URL.
     """
-    culvers_locations = ["verona", "west-allis", "appleton", "arlington-heights"]
+    culvers_locations = ["verona", "west-allis", "appleton", "this is totally not a location", "arlington-heights"]
+    valid_locations = []
     collected_flavor_data = {}
     for location in culvers_locations:
-        collected_flavor_data[location] = fetch_flavors(location)
+        fetched_flavors = fetch_flavors(location)
+        if fetched_flavors is not None:
+            valid_locations.append(location)
+            collected_flavor_data[location] = fetched_flavors
     # Creates a list of days - dynamic, but reliant on the date keys of the first location.
-    days = list(collected_flavor_data[culvers_locations[0]].keys())
+    days = list(collected_flavor_data[valid_locations[0]].keys())
     output_flavor_data(collected_flavor_data, days)
 
 flavor_finder()
